@@ -66,6 +66,17 @@ interface IncludedSection {
   items: IncludedItem[];
 }
 
+interface PaymentPlan {
+  title: string;
+  price: string;
+  featured?: boolean;
+  note?: string;
+  payments: Array<{
+    label: string;
+    amount: string;
+  }>;
+}
+
 interface FAQ {
   question: string;
   answer: string;
@@ -121,6 +132,8 @@ interface CountryData {
     type: string;
   };
   included: IncludedSection[];
+  paymentPlanDescription?: string;
+  paymentPlans?: PaymentPlan[];
   faqs: FAQ[];
   review?: {
     testimonialText: string;
@@ -1227,6 +1240,78 @@ const WhatsIncludedHighlights = memo(
   },
 );
 
+const PaymentPlansSection = memo(
+  ({
+    plans,
+    description,
+  }: {
+    plans?: PaymentPlan[];
+    description?: string;
+  }) => {
+    if (!plans || plans.length === 0) return null;
+
+    return (
+      <section
+        id="payment-plans"
+        className="relative left-1/2 right-1/2 mt-16 -ml-[50vw] -mr-[50vw] w-screen bg-[#f8fbfa] md:left-auto md:right-auto md:ml-0 md:mr-0 md:w-auto md:rounded-[28px] md:border md:border-[#0fc2bf]/10 md:shadow-[0_12px_40px_rgba(15,35,45,0.05)]"
+      >
+        <div className="mx-auto max-w-6xl px-5 py-14 md:px-10 md:py-16">
+          <div className="mb-10 text-center">
+            <h3 className="mb-3 text-3xl font-bold text-foreground">Payment Plans</h3>
+            {description && (
+              <p className="text-base text-muted-foreground md:text-lg">{description}</p>
+            )}
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {plans.map((plan) => (
+              <article
+                key={plan.title}
+                className={`relative rounded-[24px] border p-6 shadow-[0_8px_28px_rgba(15,35,45,0.045)] md:p-8 ${
+                  plan.featured
+                    ? "border-[#0fc2bf]/30 bg-[#0fc2bf]/[0.035]"
+                    : "border-slate-200/70 bg-white/80"
+                }`}
+              >
+                {plan.featured && (
+                  <span className="mb-4 inline-flex rounded-full bg-[#0fc2bf]/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#087f7c]">
+                    Early Bird
+                  </span>
+                )}
+
+                <div className="mb-6 flex items-end justify-between gap-4 border-b border-slate-200/60 pb-5">
+                  <h4 className="text-xl font-semibold text-foreground">{plan.title}</h4>
+                  <p className="text-3xl font-bold leading-none text-foreground">{plan.price}</p>
+                </div>
+
+                <div className="divide-y divide-slate-200/50">
+                  {plan.payments.map((payment) => (
+                    <div
+                      key={payment.label}
+                      className="flex items-start justify-between gap-4 py-4 first:pt-0 last:pb-0"
+                    >
+                      <span className="leading-relaxed text-muted-foreground">{payment.label}</span>
+                      <span className="shrink-0 font-bold text-foreground">{payment.amount}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {plan.note && (
+                  <p className="mt-6 border-t border-slate-200/60 pt-5 text-sm leading-relaxed text-muted-foreground">
+                    {plan.note}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  },
+);
+
+PaymentPlansSection.displayName = "PaymentPlansSection";
+
 const FAQSection = memo(
   ({ faqs, countryName }: { faqs: CountryData["faqs"]; countryName: string }) => (
     <div
@@ -1703,6 +1788,12 @@ export const ItineraryTemplate = memo(
 
               {/* What's Included Section */}
               <IncludedSection included={data.included} countryName={countryName} />
+
+              {/* Payment Plans */}
+              <PaymentPlansSection
+                plans={data.paymentPlans}
+                description={data.paymentPlanDescription}
+              />
 
               {/* FAQ Section */}
               <FAQSection faqs={data.faqs} countryName={countryName} />

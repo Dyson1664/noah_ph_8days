@@ -255,6 +255,31 @@ export const philippinesData = {
       ],
     },
   ],
+  paymentPlanDescription:
+    "Secure your place with a $650 non-refundable deposit and pay the remaining balance in two installments.",
+  paymentPlans: [
+    {
+      title: "Early Bird Price",
+      price: "$2,259",
+      featured: true,
+      payments: [
+        { label: "Deposit at booking", amount: "$650" },
+        { label: "Payment 1 due October 31, 2026", amount: "$805" },
+        { label: "Final payment due January 31, 2027", amount: "$804" },
+      ],
+      note: "Single room: add the $785 supplement to payment 1, making that payment $1,590 and the trip total $3,044.",
+    },
+    {
+      title: "Standard Price",
+      price: "$2,459",
+      payments: [
+        { label: "Deposit at booking", amount: "$650" },
+        { label: "Payment 1 due October 31, 2026", amount: "$905" },
+        { label: "Final payment due January 31, 2027", amount: "$904" },
+      ],
+      note: "Single room: add the $785 supplement to payment 1, making that payment $1,690 and the trip total $3,244.",
+    },
+  ],
   faqs: [
     {
       question: "Which airports should I fly into and out of?",
