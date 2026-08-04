@@ -1500,11 +1500,11 @@ export const ItineraryTemplate = memo(
       if (value) {
         setTimeout(() => {
           const item = document.querySelector(`[data-itinerary-day="${value}"]`);
-          const trigger = item?.querySelector("[data-accordion-trigger]") as HTMLElement | null;
-          if (!trigger) return;
+          if (!(item instanceof HTMLElement)) return;
 
+          const trigger = item.querySelector("[data-accordion-trigger]") as HTMLElement | null;
           const desktop = window.matchMedia("(min-width: 768px)").matches;
-          const targetElement = desktop ? (item as HTMLElement) : trigger;
+          const targetElement = desktop ? item : (trigger ?? item);
           const rect = targetElement.getBoundingClientRect();
           const offset = desktop ? 96 : 150;
           const targetTop = window.scrollY + rect.top - offset;
@@ -1539,7 +1539,10 @@ export const ItineraryTemplate = memo(
                   index < data.itinerary.length - 1 ? "border-b border-gray-200" : ""
                 } mx-0 md:mx-6`}
               >
-                <AccordionTrigger className="px-4 md:px-0 py-4 hover:no-underline group">
+                <AccordionTrigger
+                  data-accordion-trigger
+                  className="px-4 md:px-0 py-4 hover:no-underline group"
+                >
                   <div className="w-full flex items-baseline gap-2 md:gap-4 text-left">
                     <h2 className="whitespace-nowrap flex-shrink-0 text-2xl font-bold text-foreground">
                       Day {day.day}
