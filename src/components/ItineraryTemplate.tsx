@@ -22,7 +22,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 // Book Now Button Component (routes to Shopify payment or internal booking page)
 import { getPayUrlBySlug } from "@/data/payUrls";
 
-const getBookingUrlBySlug = (slug?: string) => (slug ? `/#/booking/${slug}` : "#");
+const getBookingUrlBySlug = (slug?: string) => (slug ? `/booking/${slug}` : "#");
 
 const BookNowButton = memo(({ tripSlug }: { tripSlug?: string }) => {
   const bookingUrl = getBookingUrlBySlug(tripSlug);

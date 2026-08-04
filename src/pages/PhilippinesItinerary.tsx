@@ -4,7 +4,7 @@ import { ItineraryTemplate } from "@/components/ItineraryTemplate";
 import { philippinesData } from "@/data/countries/philippines";
 
 const PhilippinesDesktopHero = () => {
-  const bookingUrl = philippinesData.slug ? `/#/booking/${philippinesData.slug}` : "#";
+  const bookingUrl = philippinesData.slug ? `/booking/${philippinesData.slug}` : "#";
 
   return (
     <section className="hidden w-full px-5 py-5 md:block">

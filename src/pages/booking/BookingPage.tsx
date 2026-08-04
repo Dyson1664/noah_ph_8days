@@ -589,7 +589,7 @@ export default function BookingPage2() {
                         <FormLabel className="text-sm font-normal cursor-pointer">
                           I confirm that I have read and agree to the{" "}
                           <a
-                            href="/#/terms"
+                            href="/terms"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary hover:underline font-medium"
