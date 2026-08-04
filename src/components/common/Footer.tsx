@@ -59,6 +59,13 @@ const Footer = () => {
               >
                 Terms &amp; Conditions
               </Link>
+              <Link
+                to="/admin/login"
+                className="block hover:text-primary transition-colors"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                Admin Login
+              </Link>
             </div>
           </div>
         </div>

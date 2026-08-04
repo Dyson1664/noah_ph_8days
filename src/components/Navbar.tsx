@@ -34,8 +34,16 @@ const Navbar = memo(({ logoStyle }: NavbarProps = {}) => {
             </Button>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8 ml-auto mr-12" />
+          <div className="ml-3 flex items-center">
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="shrink-0 border-primary/30 text-primary hover:bg-primary/10"
+            >
+              <Link to="/guest-login">Guest Login</Link>
+            </Button>
+          </div>
 
           {/* Mobile menu button (disabled until there are mobile links to show) */}
           {/* <div className="md:hidden ml-auto">
